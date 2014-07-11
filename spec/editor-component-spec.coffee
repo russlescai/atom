@@ -254,7 +254,7 @@ describe "EditorComponent", ->
         runSetImmediateCallbacks()
         expect(component.lineNodeForScreenRow(10).innerHTML).toBe '<span class="indent-guide"><span class="invisible-character">C</span></span><span class="invisible-character">E</span>'
 
-      fdescribe "when soft wrapping is enabled", ->
+      describe "when soft wrapping is enabled", ->
         beforeEach ->
           editor.setText "a line that wraps "
           editor.setSoftWrap(true)
@@ -1898,7 +1898,7 @@ describe "EditorComponent", ->
     beforeEach ->
       editor.setSoftWrap(true)
 
-    fit "updates the wrap location when the editor is resized", ->
+    it "updates the wrap location when the editor is resized", ->
       newHeight = 4 * editor.getLineHeightInPixels() + "px"
       expect(newHeight).toBeLessThan node.style.height
       node.style.height = newHeight
