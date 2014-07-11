@@ -254,12 +254,12 @@ describe "EditorComponent", ->
         runSetImmediateCallbacks()
         expect(component.lineNodeForScreenRow(10).innerHTML).toBe '<span class="indent-guide"><span class="invisible-character">C</span></span><span class="invisible-character">E</span>'
 
-      describe "when soft wrapping is enabled", ->
+      fdescribe "when soft wrapping is enabled", ->
         beforeEach ->
           editor.setText "a line that wraps "
           editor.setSoftWrap(true)
           runSetImmediateCallbacks()
-          node.style.width = 16 * charWidth + 'px'
+          node.style.width = 16 * charWidth + editor.getVerticalScrollbarWidth() + 'px'
           component.measureScrollView()
           runSetImmediateCallbacks()
 
@@ -1898,7 +1898,7 @@ describe "EditorComponent", ->
     beforeEach ->
       editor.setSoftWrap(true)
 
-    it "updates the wrap location when the editor is resized", ->
+    fit "updates the wrap location when the editor is resized", ->
       newHeight = 4 * editor.getLineHeightInPixels() + "px"
       expect(newHeight).toBeLessThan node.style.height
       node.style.height = newHeight
@@ -1908,7 +1908,7 @@ describe "EditorComponent", ->
       expect(node.querySelectorAll('.line')).toHaveLength(4 + lineOverdrawMargin + 1)
 
       gutterWidth = node.querySelector('.gutter').offsetWidth
-      node.style.width = gutterWidth + 14 * charWidth + 'px'
+      node.style.width = gutterWidth + 14 * charWidth + editor.getVerticalScrollbarWidth() + 'px'
       advanceClock(component.scrollViewMeasurementInterval)
       runSetImmediateCallbacks()
       expect(node.querySelector('.line').textContent).toBe "var quicksort "
